@@ -9,7 +9,9 @@ const Home: React.FC = () => {
   const [tarefas, setTarefas] = useState<Tarefa[]>([]);
 
   function adicionar() {
-    const nova = new Tarefa("Estudar", "POO no Ionic". true);
+    {/*instaciar a classe*/}
+    const nova = new Tarefa("Estudar", "POO no Ionic");
+    nova.concluir();
 
     setTarefas([...tarefas, nova]);
 
