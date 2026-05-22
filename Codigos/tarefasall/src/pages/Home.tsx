@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { IonButton, IonContent, IonPage} from '@ionic/react';
 import { Tarefa } from '../models/Tarefa';
 
-
-
 const Home: React.FC = () => {
 
   const [tarefas, setTarefas] = useState<Tarefa[]>([]);
@@ -17,8 +15,6 @@ const Home: React.FC = () => {
 
     console.log(tarefas);
   }
-
-
 
   return (
     <IonPage>
