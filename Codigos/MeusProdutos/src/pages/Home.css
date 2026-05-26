@@ -6,3 +6,14 @@
 .ion-padding-start{
     color: #4d8dff;
 }
+ListForm {
+    display: flex;
+    justify-content: center; /* centraliza horizontal */
+    align-items: center;     /* centraliza vertical */
+    height: 100vh;
+}
+
+.ListForm {
+    margin: 0 auto;
+    width 400px;
+}
