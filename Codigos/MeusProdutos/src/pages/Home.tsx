@@ -1,27 +1,37 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList} from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonButton} from '@ionic/react';
+import { useHistory } from 'react-router';
 import './Home.css';
 
 const Home: React.FC = () => {
-  
-    return (
-      <IonPage>
 
-        <IonHeader>
-          <IonToolbar>
-            <IonTitle>Blank</IonTitle>
-          </IonToolbar>
-        </IonHeader>
+  const history = useHistory();
 
-        <IonContent fullscreen>
+  function navegarParaCadastro(){
+    history.push('/Cadastro');
+  }
 
-          <IonList>
+  return (
 
-          </IonList>
+    <IonPage>
 
-        </IonContent>
+      <IonHeader>
+        <IonToolbar>
+          <IonTitle>Blank</IonTitle>
+        </IonToolbar>
+      </IonHeader>
 
-      </IonPage>
-    );
-  };
+      <IonContent fullscreen>
+
+        <IonList>
+
+        </IonList>
+
+        <IonButton onClick={navegarParaCadastro}>Ir para Cadastro</IonButton>
+
+      </IonContent>
+
+    </IonPage>
+  );
+};
 
 export default Home;
