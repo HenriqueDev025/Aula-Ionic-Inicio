@@ -8,12 +8,14 @@ app.use(express.json());
 const arquivo = "Produtos.json";
 const PORT = 3000;
 
+//get//
 app.get("/produtos", (req, res) => {
     const dados = fs.readFileSync(arquivo);
     const produtos = JSON.parse(dados);
     res.json(produtos);
 });
 
+//post//
 app.post("/produtos",(req, res) => {
     const dados = fs.readFileSync(arquivo);
     const produtos = JSON.parse(dados);
@@ -27,6 +29,7 @@ app.post("/produtos",(req, res) => {
     res.json(novoProduto);
 });
 
+//put//
 app.put("/produtos/:id",(req, res) => {
     const dados = fs.readFileSync(arquivo);
     let produtos = JSON.parse(dados);
@@ -38,6 +41,7 @@ app.put("/produtos/:id",(req, res) => {
     res.json({ msg: "Atualizado" });
 });
 
+//Delete//
 app.delete("/produtos/:id", (req, res) => {
     const dados = fs.readFileSync(arquivo);
     let produtos = JSON.parse(dados);
