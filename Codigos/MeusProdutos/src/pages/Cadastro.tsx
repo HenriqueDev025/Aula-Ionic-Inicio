@@ -29,6 +29,7 @@ const Cadastro: React.FC = () => {
       if (precoRef.current) precoRef.current.value = "";
       if (estoqueRef.current) estoqueRef.current.value = "";
     }
+    
   }
 
     return (

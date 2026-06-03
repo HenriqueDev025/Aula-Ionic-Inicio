@@ -4,5 +4,11 @@
         "nome": "Camisa",
         "preco": 29.59,
         "quantidade": 100
+    },
+    {
+        "id": 2,
+        "nome": "Calça",
+        "preco": 59.99,
+        "quantidade": 50
     }
 ]

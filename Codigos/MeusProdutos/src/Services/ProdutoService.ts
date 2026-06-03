@@ -4,7 +4,7 @@ export class ProdutoService{
 
     private chave = "produtos";
 
-    // Salvar lista no localStorage
+    // Salvar lista no localStorage Apagar//
     salvar(produtos: Produto[]){
         localStorage.setItem(this.chave, JSON.stringify(produtos));
     }
