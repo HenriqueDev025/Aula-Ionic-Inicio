@@ -39,21 +39,21 @@ const Home: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className='ion-padding'>
-        <h2>Bem-vindo ao Controle de Estoque</h2>
+        <h2>Inicio de Produtos</h2>
 
         <IonButton onClick={navegarParaCadastro}> Cadastrar Produto</IonButton>         
          <IonList>
-          {produtos.map((produto, index) => {
+          {produtos.map((produto) => {
             const estoque = produto.estoque ?? produto.quantidade ?? 0;
             return (
-              <IonItemSliding key={index}>
+              <IonItemSliding key={produto.id ?? produto.nome}>
                 <IonItem>
                   <IonLabel>
-                    {produto.nome} - R$ {produto.preco.toFixed(2)} | Estoque: {estoque}
+                    {produto.nome} - R$ {Number(produto.preco).toFixed(2)} | Estoque: {estoque}
                   </IonLabel>
                 </IonItem>
                 <IonItemOptions>
-                  <IonItemOption color='danger' onClick={() => removerProduto(index)}>
+                  <IonItemOption color='danger' onClick={() => removerProduto(produto.id)}>
                     Remover
                   </IonItemOption>
                 </IonItemOptions>

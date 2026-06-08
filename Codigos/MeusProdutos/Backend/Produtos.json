@@ -1,14 +1,20 @@
 [
-    {
-        "id": 1,
-        "nome": "Camisa",
-        "preco": 29.59,
-        "quantidade": 100
-    },
-    {
-        "id": 2,
-        "nome": "Calça",
-        "preco": 59.99,
-        "quantidade": 50
-    }
+  {
+    "id": 1,
+    "nome": "Camisa",
+    "preco": 29.59,
+    "quantidade": 100
+  },
+  {
+    "id": 2,
+    "nome": "Calça",
+    "preco": 59.99,
+    "quantidade": 50
+  },
+  {
+    "id": 1780949998399,
+    "nome": "Cinto",
+    "preco": 55,
+    "estoque": 2
+  }
 ]

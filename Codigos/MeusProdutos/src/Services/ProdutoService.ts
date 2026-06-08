@@ -1,36 +1,39 @@
 import { Produto } from "../Models/Produtos";
 
-export class ProdutoService{
+const API_URL = "http://localhost:3000/produtos";
 
-    private chave = "produtos";
+export class ProdutoService {
+  async listar(): Promise<Produto[]> {
+    const resposta = await fetch(API_URL);
 
-    // Salvar lista no localStorage Apagar//
-    salvar(produtos: Produto[]){
-        localStorage.setItem(this.chave, JSON.stringify(produtos));
+    if (!resposta.ok) {
+      throw new Error("Não foi possível carregar os produtos.");
     }
 
-    //obter lista
-    listar(): Produto[]{
-        const dados = localStorage.getItem(this.chave);
+    return resposta.json();
+  }
 
-        if(!dados) return [];
+  async adicionar(produto: Produto): Promise<Produto> {
+    const resposta = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(produto),
+    });
 
-        return JSON.parse(dados);
+    if (!resposta.ok) {
+      throw new Error("Não foi possível cadastrar o produto.");
     }
 
-    //adicionar produto
-    adicionar(produto: Produto){
-        const lista = this.listar();
-        lista.push(produto);
-        this.salvar(lista);
+    return resposta.json();
+  }
+
+  async remover(id: number): Promise<void> {
+    const resposta = await fetch(`${API_URL}/${id}`, {
+      method: "DELETE",
+    });
+
+    if (!resposta.ok) {
+      throw new Error("Não foi possível remover o produto.");
     }
-
-    //remover produtos
-    remover(index: number){
-        const lista = this.listar();
-        lista.splice(index, 1);
-        this.salvar(lista);
-
-    }
-
+  }
 }
