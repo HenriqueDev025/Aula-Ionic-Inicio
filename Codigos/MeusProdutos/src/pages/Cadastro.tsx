@@ -1,38 +1,57 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonItem, IonList, IonButton } from '@ionic/react';
 import './Cadastro.css';
+import React, { useRef } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useIonAlert } from '@ionic/react';
+import { ProdutoService } from '../Services/ProdutoService';
 import { Produto } from '../Models/Produtos';
-import React, { useState,useRef } from 'react';
+
 
 const Cadastro: React.FC = () => {
 
-  const [produtos, setProdutos] = useState<Produto[]>([]);
   const nomeRef = useRef<any>(null);
   const precoRef = useRef<any>(null);
   const estoqueRef = useRef<any>(null);
+  const history = useHistory();
 
-  function adicionarProduto() {
+  const [presentAlert] = useIonAlert()
+  const service = new ProdutoService();
+
+  async function adicionarProduto() {
     const nome = nomeRef.current?.value || "";
     const preco = parseFloat(precoRef.current?.value || "0");
     const estoque = parseInt(estoqueRef.current?.value || "0");
 
-    if (nome && preco > 0) {
-      const novoProduto = new Produto(nome, preco);
-      novoProduto.adicionarEstoque(estoque);
-
-      setProdutos([...produtos, novoProduto]);
-
-      console.log("Produto adicionado:", novoProduto);
-      console.log("Produtos:", produtos);
-
+    if (nome && preco > 0 && estoque > 0) {
+      const produto = new Produto(nome, preco);
+      produto.adicionarEstoque(estoque);
+      await service.adicionar(produto);
+      presentAlert({
+        header: 'Sucesso',
+        message: 'Produto cadastrado com sucesso!',
+        buttons: ['OK']
+      });
 
       if (nomeRef.current) nomeRef.current.value = "";
       if (precoRef.current) precoRef.current.value = "";
       if (estoqueRef.current) estoqueRef.current.value = "";
+
+      //history.push('/home');
+    } else {
+      presentAlert({
+        header: 'Erro',
+        message: 'Por favor, preencha o nome, preço e estoque corretamente.',
+        buttons: ['OK']
+      });
     }
-    
   }
 
-    return (
+  function navegarParaHome(){
+    history.push('/home');
+  }
+
+
+  return (
       <IonPage>
 
         <IonHeader>
@@ -45,17 +64,16 @@ const Cadastro: React.FC = () => {
 
           <IonList className="ListForm">
 
-            <IonItem>
-              <IonInput ref={nomeRef} label="Nome" placeholder="Produtos"></IonInput>
-            </IonItem>
+            <IonButton onClick={navegarParaHome}> Voltar para Home</IonButton>
+            <br />
+            
+            <IonInput ref={nomeRef} label="Descrição do Produto" labelPlacement="floating" fill="outline" placeholder="Digite aqui"></IonInput>
+            <br />
 
-            <div>
-              <IonInput ref={precoRef} label="Preco" counter={true} maxlength={20}></IonInput>
-            </div>
+            <IonInput ref={precoRef} label="Preço" labelPlacement="floating" fill="outline" placeholder="Digite aqui"></IonInput>
+            <br />
 
-            <div>
-              <IonInput ref={estoqueRef} label="Estoque" counter={true} maxlength={20}></IonInput>
-            </div>
+            <IonInput ref={estoqueRef} label="Estoque" labelPlacement="floating" fill="outline" placeholder="Digite aqui"></IonInput>
 
           <IonButton className='ButCadastro' onClick={adicionarProduto}>Cadastrar Produto</IonButton>
 
