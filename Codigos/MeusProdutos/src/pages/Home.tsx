@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonList, IonLabel, IonItem, useIonViewWillEnter, IonItemSliding, IonItemOptions, IonItemOption } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonList, IonLabel, IonItem, useIonViewWillEnter, IonItemSliding, IonItemOption } from '@ionic/react';
 import { useState } from 'react';
 import { ProdutoService } from '../Services/ProdutoService';
 import { useHistory } from 'react-router-dom';
@@ -23,7 +23,7 @@ const Home: React.FC = () => {
     setProdutos(produtosCarregados);
   }
   
-  async function removerProduto(id: number) {
+  async function remover(id: number) {
     await service.remover(id);
     carregarProdutos();
   }
@@ -52,11 +52,9 @@ const Home: React.FC = () => {
                     {produto.nome} - R$ {Number(produto.preco).toFixed(2)} | Estoque: {estoque}
                   </IonLabel>
                 </IonItem>
-                <IonItemOptions>
-                  <IonItemOption color='danger' onClick={() => removerProduto(produto.id)}>
+                  <IonItemOption color='danger' onClick={() => remover(produto.id)}>
                     Remover
                   </IonItemOption>
-                </IonItemOptions>
               </IonItemSliding>
 
             );
