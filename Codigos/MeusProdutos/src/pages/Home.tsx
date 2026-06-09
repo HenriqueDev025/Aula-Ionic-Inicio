@@ -32,7 +32,7 @@ const Home: React.FC = () => {
     history.push('/cadastro');
   }
   return (
-    <IonPage>
+    <IonPage className='topHome'>
       <IonHeader>
         <IonToolbar>
           <IonTitle>Controle de Estoque</IonTitle>
@@ -42,25 +42,25 @@ const Home: React.FC = () => {
         <h2>Inicio de Produtos</h2>
 
         <IonButton onClick={navegarParaCadastro}> Cadastrar Produto</IonButton>         
-         <IonList>
-          {produtos.map((produto) => {
-            const estoque = produto.estoque ?? produto.quantidade ?? 0;
-            return (
-              <IonItemSliding key={produto.id ?? produto.nome}>
-                <IonItem>
-                  <IonLabel>
-                    {produto.nome} - R$ {Number(produto.preco).toFixed(2)} | Estoque: {estoque}
-                  </IonLabel>
-                </IonItem>
-                  <IonItemOption color='danger' onClick={() => remover(produto.id)}>
+          <IonList>
+            {produtos.map((produto) => {
+              const estoque = produto.estoque ?? produto.quantidade ?? 0;
+              return (
+                <IonItemSliding key={produto.id ?? produto.nome}>
+                  <IonItem>
+                    <IonLabel>
+                      {produto.nome} - R$ {Number(produto.preco).toFixed(2)} | Estoque: {estoque}
+                    </IonLabel>
+                  </IonItem>
+                  <IonItemOption onClick={() => remover(produto.id)}>
                     Remover
                   </IonItemOption>
-              </IonItemSliding>
+                </IonItemSliding>
 
-            );
-            
-          })}          
-         </IonList>
+              );
+              
+            })}          
+          </IonList>
       </IonContent>
     </IonPage>
   );

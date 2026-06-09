@@ -1,0 +1,10 @@
+.topHome{
+    border:solid #4d8dff 2px;
+    margin: 0 auto;
+    width: 60%;
+    height: 90%;
+    margin-top: 2%;
+}
+.ion-padding h2{
+    text-align: center; /* centraliza horizontal */
+}
