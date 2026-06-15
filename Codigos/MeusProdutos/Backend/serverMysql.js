@@ -1,13 +1,14 @@
-const mysql = require('mysql2')
+import express from "express";
+import mysql from "mysql2";
 
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    passoword: '',
+    passoword: 'root',
     database: 'controle_produtos'
 });
 
-const express = require('express');
+
 const app = express()
 
 const port = 3000;
