@@ -23,7 +23,7 @@ const Home: React.FC = () => {
     setProdutos(produtosCarregados);
   }
   
-  async function remover(id: number) {
+  async function removerProdutos(id: number) {
     await service.remover(id);
     carregarProdutos();
   }
@@ -52,7 +52,7 @@ const Home: React.FC = () => {
                       {produto.nome} - R$ {Number(produto.preco).toFixed(2)} | Estoque: {estoque}
                     </IonLabel>
                   </IonItem>
-                  <IonItemOption onClick={() => remover(produto.id)}>
+                  <IonItemOption onClick={() => removerProdutos(produto.id)}>
                     Remover
                   </IonItemOption>
                 </IonItemSliding>
