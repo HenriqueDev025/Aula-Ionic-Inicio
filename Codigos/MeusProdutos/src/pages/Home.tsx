@@ -24,8 +24,12 @@ const Home: React.FC = () => {
   }
   
   async function removerProdutos(id: number) {
-    await service.remover(id);
-    carregarProdutos();
+    try {
+      await service.remover(id);
+      await carregarProdutos();
+    } catch (error) {
+      console.error('Erro ao remover produto:', error);
+    }
   }
   //navegando para a página de cadastro
   function navegarParaCadastro(){
@@ -44,21 +48,27 @@ const Home: React.FC = () => {
         <IonButton onClick={navegarParaCadastro}> Cadastrar Produto</IonButton>         
           <IonList>
             {produtos.map((produto) => {
-              const estoque = produto.estoque ?? produto.quantidade ?? 0;
+              const id = produto.id ?? produto.ID;
+              const nome = produto.nome ?? produto.NOME ?? 'Produto';
+              const preco = Number(produto.preco ?? produto.PRECO ?? 0);
+              const estoque = Number(produto.estoque ?? produto.quantidade ?? produto.ESTOQUE ?? 0);
+
+              if (id == null) {
+                return null;
+              }
+
               return (
-                <IonItemSliding key={produto.id ?? produto.nome}>
+                <IonItemSliding key={id}>
                   <IonItem>
                     <IonLabel>
-                      {produto.nome} - R$ {Number(produto.preco).toFixed(2)} | Estoque: {estoque}
+                      {nome} - R$ {Number.isFinite(preco) ? preco.toFixed(2) : '0.00'} | Estoque: {estoque}
                     </IonLabel>
                   </IonItem>
-                  <IonItemOption onClick={() => removerProdutos(produto.id)}>
+                  <IonItemOption onClick={() => removerProdutos(Number(id))}>
                     Remover
                   </IonItemOption>
                 </IonItemSliding>
-
               );
-              
             })}          
           </IonList>
       </IonContent>

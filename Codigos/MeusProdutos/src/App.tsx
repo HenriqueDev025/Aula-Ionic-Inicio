@@ -49,8 +49,12 @@ const App: React.FC = () => (
           <Redirect to="/home" />
         </Route>
 
+        <Route exact path="/cadastro">
+          <Cadastro />
+        </Route>
+
         <Route exact path="/Cadastro">
-          <Cadastro/>
+          <Cadastro />
         </Route>
         
       </IonRouterOutlet>
